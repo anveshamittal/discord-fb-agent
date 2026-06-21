@@ -27,6 +27,7 @@ from token_refresh import (
     HTML_PAGE,
     exchange_user_token,
     fetch_page_token,
+    render_page,
     render_result,
 )
 
@@ -90,7 +91,7 @@ async def health():
 
 @app.get("/token", response_class=HTMLResponse)
 async def token_form():
-    return HTML_PAGE.format(result="")
+    return render_page()
 
 
 @app.post("/token", response_class=HTMLResponse)
@@ -106,7 +107,7 @@ async def token_generate(
         result = render_result("", token=page_token)
     except Exception as e:
         result = render_result(f"Token generation failed: {e}", is_error=True)
-    return HTML_PAGE.format(result=result)
+    return render_page(result)
 
 
 if __name__ == "__main__":

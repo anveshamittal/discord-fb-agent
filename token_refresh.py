@@ -188,6 +188,10 @@ HTML_PAGE = """
 """.strip()
 
 
+def render_page(result: str = "") -> str:
+    return HTML_PAGE.replace("{result}", result)
+
+
 def render_result(message: str, is_error: bool = False, token: str = None) -> str:
     if token:
         return f"""
@@ -198,3 +202,5 @@ def render_result(message: str, is_error: bool = False, token: str = None) -> st
         """
     css_class = "error" if is_error else "success"
     return f'<div class="{css_class}">{message}</div>'
+
+
